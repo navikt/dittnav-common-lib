@@ -20,6 +20,7 @@ publishing {
             name = "GitHubPackages"
             url = uri("https://maven.pkg.github.com/navikt/dittnav-common-lib")
             credentials {
+                username = ""
                 password = System.getenv("GITHUB_TOKEN")
             }
         }
