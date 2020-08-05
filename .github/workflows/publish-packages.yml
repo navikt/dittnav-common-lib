@@ -24,4 +24,4 @@ jobs:
       - name: Publish packages
         run: gradle publish
         env:
-          GITHIB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
