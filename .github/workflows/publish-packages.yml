@@ -19,9 +19,7 @@ jobs:
           java-version: 1.11
 
       - name: Compile and test
-        uses: navikt/pb-common-gh-actions/build@v1
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gradle build
 
       - name: Publish packages
         run: gradle publish
