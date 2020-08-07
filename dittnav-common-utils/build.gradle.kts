@@ -1,4 +1,7 @@
 val kafkaVersion = "2.3.0"
+val navTokenValidator = "1.1.0"
+val logstashVersion = "5.2"
+val logbackVersion = "1.2.3"
 
 plugins {
     `maven-publish`
@@ -8,7 +11,11 @@ plugins {
 
 dependencies {
     compile(kotlin("stdlib-jdk8"))
-    compile("org.apache.kafka:kafka-clients:$kafkaVersion")
+    implementation("ch.qos.logback:logback-classic:$logbackVersion")
+    implementation("net.logstash.logback:logstash-logback-encoder:$logstashVersion")
+    implementation("org.apache.kafka:kafka-clients:$kafkaVersion")
+    implementation("no.nav.security:token-validation-ktor:$navTokenValidator")
+
 }
 
 repositories {

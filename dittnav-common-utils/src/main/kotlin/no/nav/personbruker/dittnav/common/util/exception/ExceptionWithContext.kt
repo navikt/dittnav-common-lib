@@ -1,6 +1,6 @@
-package no.nav.personbruker.dittnav.common.util.database.exception
+package no.nav.personbruker.dittnav.common.util.exception
 
-open class AbstractPersonbrukerException(message: String, cause: Throwable?) : Exception(message, cause) {
+open class ExceptionWithContext(message: String, cause: Throwable?) : Exception(message, cause) {
 
     val context: MutableMap<String, Any> = mutableMapOf()
 
