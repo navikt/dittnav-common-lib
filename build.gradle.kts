@@ -4,7 +4,7 @@ plugins {
     kotlin("plugin.allopen") version kotlinVersion
 }
 
-val libraryVersion = "0.0.1"
+val libraryVersion = properties["version"] ?: "latest-local"
 
 subprojects {
     group = "no.nav"
