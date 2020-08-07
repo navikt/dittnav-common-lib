@@ -1,7 +1,7 @@
-name: Build and publish library packages on push to master
+name: Build and test library on push to master
 
 on:
-  release:
+  push:
     branches:
       - master
 
