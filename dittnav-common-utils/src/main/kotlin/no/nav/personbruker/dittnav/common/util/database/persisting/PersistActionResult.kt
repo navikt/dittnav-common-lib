@@ -1,6 +1,4 @@
-package no.nav.personbruker.dittnav.eventaggregator.common.database
-
-import no.nav.personbruker.dittnav.common.util.database.persisting.PersistFailureReason
+package no.nav.personbruker.dittnav.common.util.database.persisting
 
 class PersistActionResult private constructor(
         val entityId: Int, val wasSuccessful: Boolean, val persistOutcome: PersistFailureReason) {
