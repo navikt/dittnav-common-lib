@@ -1,4 +1,4 @@
-package no.nav.personbruker.dittnav.common.util.security
+package no.nav.personbruker.dittnav.common.security
 
 enum class IdentityClaim(val claimName : String) {
 

@@ -18,7 +18,7 @@ dependencies {
     api(kotlin("stdlib-jdk8"))
     implementation("ch.qos.logback:logback-classic:$logbackVersion")
     implementation("net.logstash.logback:logstash-logback-encoder:$logstashVersion")
-    implementation("org.apache.kafka:kafka-clients:$kafkaVersion")
+    implementation("no.nav.security:token-validation-ktor:$navTokenValidator")
     testImplementation(kotlin("test-junit5"))
     testImplementation("io.mockk:mockk:$mockkVersion")
     testImplementation("org.amshove.kluent:kluent:$kluentVersion")
