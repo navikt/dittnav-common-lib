@@ -1,4 +1,4 @@
-package no.nav.personbruker.innloggingsstatus.pdl.cache
+package no.nav.personbruker.dittnav.common.util.cache
 
 import no.nav.personbruker.dittnav.common.util.list.partitionFromIndex
 import org.slf4j.LoggerFactory

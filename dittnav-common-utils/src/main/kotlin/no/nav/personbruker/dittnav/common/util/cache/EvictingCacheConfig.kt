@@ -1,4 +1,4 @@
-package no.nav.personbruker.innloggingsstatus.pdl.cache
+package no.nav.personbruker.dittnav.common.util.cache
 
 data class EvictingCacheConfig (
     val evictionThreshold: Int = 1024,
