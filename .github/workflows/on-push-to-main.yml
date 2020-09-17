@@ -1,0 +1,35 @@
+name: Build, release and publish
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Generate release tag
+        run: |
+          export TAG_NAME="$(TZ="Europe/Oslo" date +%Y.%m.%d-%H.%M)-$(echo $GITHUB_SHA | cut -c 1-12)"
+          echo "::set-env name=RELEASE_TAG::$TAG_NAME"
+
+      - name: Compile
+        run: gradle -Plib_version="$(echo $TAG_NAME)" clean build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Release (and publish)
+        id: create_release
+        uses: actions/create-release@latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.RELEASE_TAG }}
+          release_name: ${{ env.RELEASE_TAG }}
+          draft: false
+          prerelease: false
