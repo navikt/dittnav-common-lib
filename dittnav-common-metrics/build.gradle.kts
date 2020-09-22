@@ -1,8 +1,3 @@
-val logstashVersion = "5.2"
-val logbackVersion = "1.2.3"
-val influxdbVersion = "2.8"
-val coroutinesVersion = "1.3.7"
-
 plugins {
     `maven-publish`
     `java-library`
@@ -32,11 +27,11 @@ publishing {
 }
 
 dependencies {
-    compile(kotlin("stdlib-jdk8"))
-    implementation("ch.qos.logback:logback-classic:$logbackVersion")
-    implementation("net.logstash.logback:logstash-logback-encoder:$logstashVersion")
-    compile("org.influxdb:influxdb-java:$influxdbVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
+    api(kotlin("stdlib-jdk8"))
+    implementation(Logback.classic)
+    implementation(Logstash.logbackEncoder)
+    implementation(Influxdb.java)
+    implementation(Kotlinx.coroutines)
 
 }
 

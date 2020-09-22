@@ -1,13 +1,3 @@
-val kafkaVersion = "2.3.0"
-val navTokenValidator = "1.3.0"
-val logstashVersion = "5.2"
-val logbackVersion = "1.2.3"
-val junitVersion = "5.4.1"
-val mockkVersion = "1.9.3"
-val kluentVersion = "1.52"
-val jjwtVersion = "0.11.0"
-
-
 plugins {
     `maven-publish`
     `java-library`
@@ -16,22 +6,22 @@ plugins {
 
 dependencies {
     api(kotlin("stdlib-jdk8"))
-    implementation("ch.qos.logback:logback-classic:$logbackVersion")
-    implementation("net.logstash.logback:logstash-logback-encoder:$logstashVersion")
-    implementation("no.nav.security:token-validation-ktor:$navTokenValidator")
+    implementation(Logback.classic)
+    implementation(Logstash.logbackEncoder)
+    implementation(NAV.tokenValidatorKtor)
     testImplementation(kotlin("test-junit5"))
-    testImplementation("io.mockk:mockk:$mockkVersion")
-    testImplementation("org.amshove.kluent:kluent:$kluentVersion")
-    testImplementation("io.jsonwebtoken:jjwt-api:$jjwtVersion")
-    testRuntime("io.jsonwebtoken:jjwt-impl:$jjwtVersion")
-    testRuntime("io.jsonwebtoken:jjwt-jackson:$jjwtVersion")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
-
+    testImplementation(Mockk.mockk)
+    testImplementation(Kluent.kluent)
+    testImplementation(Jjwt.api)
+    testImplementation(Jjwt.impl)
+    testImplementation(Jjwt.jackson)
+    testImplementation(Junit.engine)
 }
 
 repositories {
     jcenter()
     mavenCentral()
+    mavenLocal()
 }
 
 publishing {
