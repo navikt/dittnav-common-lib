@@ -28,10 +28,10 @@ publishing {
 
 dependencies {
     api(kotlin("stdlib-jdk8"))
-    implementation(Logback.classic)
-    implementation(Logstash.logbackEncoder)
     implementation(Influxdb.java)
     implementation(Kotlinx.coroutines)
+    implementation(Logback.classic)
+    implementation(Logstash.logbackEncoder)
 
 }
 

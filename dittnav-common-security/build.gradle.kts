@@ -10,12 +10,12 @@ dependencies {
     implementation(Logstash.logbackEncoder)
     implementation(NAV.tokenValidatorKtor)
     testImplementation(kotlin("test-junit5"))
-    testImplementation(Mockk.mockk)
-    testImplementation(Kluent.kluent)
     testImplementation(Jjwt.api)
     testImplementation(Jjwt.impl)
     testImplementation(Jjwt.jackson)
     testImplementation(Junit.engine)
+    testImplementation(Kluent.kluent)
+    testImplementation(Mockk.mockk)
 }
 
 repositories {

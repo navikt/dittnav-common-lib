@@ -6,17 +6,16 @@ plugins {
 
 dependencies {
     api(kotlin("stdlib-jdk8"))
+    implementation(Kafka.Apache.clients)
     implementation(Logback.classic)
     implementation(Logstash.logbackEncoder)
-    implementation(Kafka.Apache.clients)
     testImplementation(kotlin("test-junit5"))
-    testImplementation(Mockk.mockk)
-    testImplementation(Kluent.kluent)
     testImplementation(Jjwt.api)
     testImplementation(Jjwt.impl)
     testImplementation(Jjwt.jackson)
     testImplementation(Junit.engine)
-
+    testImplementation(Kluent.kluent)
+    testImplementation(Mockk.mockk)
 }
 
 repositories {
