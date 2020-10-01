@@ -1,12 +1,11 @@
 package no.nav.personbruker.dittnav.common.util.cache
 
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import no.nav.personbruker.dittnav.common.util.list.partitionFromIndex
 import org.slf4j.LoggerFactory
 import java.time.Instant
 import java.time.temporal.ChronoUnit
-import java.util.concurrent.locks.ReentrantReadWriteLock
-import kotlin.concurrent.read
-import kotlin.concurrent.write
 
 class EvictingCache<K, V>(config: EvictingCacheConfig = EvictingCacheConfig()) {
 
@@ -16,7 +15,7 @@ class EvictingCache<K, V>(config: EvictingCacheConfig = EvictingCacheConfig()) {
     private val entryMap = mutableMapOf<K, EntryWrapper<K, V>>()
     private val entryOrder = mutableListOf<EntryWrapper<K, V>>()
 
-    private val lock = ReentrantReadWriteLock()
+    private val mutex = Mutex()
 
     private var lastEviction: Instant? = null
 
@@ -34,7 +33,7 @@ class EvictingCache<K, V>(config: EvictingCacheConfig = EvictingCacheConfig()) {
         }
     }
 
-    private fun readEntry(key: K) = lock.read {
+    private suspend fun readEntry(key: K) = mutex.withLock {
         entryMap[key]
     }
 
@@ -48,7 +47,7 @@ class EvictingCache<K, V>(config: EvictingCacheConfig = EvictingCacheConfig()) {
         }
         val entryWrapper = wrapperBuilder(key, entry)
 
-        lock.write {
+        mutex.withLock {
             entryOrder.add(entryWrapper)
             entryMap[key] = entryWrapper
         }
@@ -56,13 +55,13 @@ class EvictingCache<K, V>(config: EvictingCacheConfig = EvictingCacheConfig()) {
         return entry
     }
 
-    private fun checkThreshold() {
+    private suspend fun checkThreshold() {
         if (entryMap.size >= evictionThreshold && canPerformMassEviction()) {
             evictAllExpired()
         }
     }
 
-    private fun canPerformMassEviction(): Boolean = lock.read {
+    private suspend fun canPerformMassEviction(): Boolean = mutex.withLock {
         return lastEviction?.plus(massEvictionCoolDownMinutes, ChronoUnit.MINUTES)
             ?.isBefore(Instant.now())
             ?: true
@@ -74,20 +73,20 @@ class EvictingCache<K, V>(config: EvictingCacheConfig = EvictingCacheConfig()) {
     }
 
 
-    private fun evictEntry(key: K) = lock.write {
+    private suspend fun evictEntry(key: K) = mutex.withLock {
         entryMap.remove(key)?.let {
             entryOrder.remove(it)
         }
     }
 
-    private fun evictAllExpired() {
+    private suspend fun evictAllExpired() {
         val start = System.nanoTime()
         val evicted = performEvictionOfExpiredEntries()
         val durationNanos = System.nanoTime() - start
         log.debug("Evicted $evicted entries from cache in ${durationNanos / 1000} µs.")
     }
 
-    private fun performEvictionOfExpiredEntries(): Int = lock.write {
+    private suspend fun performEvictionOfExpiredEntries(): Int = mutex.withLock {
         val numberOfEntriesToEvict = 1 + entryOrder.indexOfLast { it.isExpired() }
         val remainingValidEntries = entryOrder.partitionFromIndex(numberOfEntriesToEvict)
 

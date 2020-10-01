@@ -6,5 +6,7 @@ data class SensuConfig (
     val eventsTopLevelName: String,
     val applicationName: String,
     val clusterName: String,
-    val namespace: String
+    val namespace: String,
+    val enableEvenBatching: Boolean = false,
+    val eventBatchesPerSecond: Int = 3
 )

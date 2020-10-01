@@ -6,8 +6,7 @@ import java.util.concurrent.TimeUnit
 
 class InfluxMetricsReporter(sensuConfig: SensuConfig) : MetricsReporter {
 
-    private val sensuClient = SensuClient(sensuConfig.hostName, sensuConfig.hostPort)
-    private val eventsTopLevelName = sensuConfig.eventsTopLevelName
+    private val dataPointRelay = DataPointRelayFactory.createDataPointRelay(sensuConfig)
 
     override suspend fun registerDataPoint(measurement: String, fields: Map<String, Any>, tags: Map<String, String>) {
         val point = Point.measurement(measurement)
@@ -17,7 +16,7 @@ class InfluxMetricsReporter(sensuConfig: SensuConfig) : MetricsReporter {
                 .fields(fields)
                 .build()
 
-        sensuClient.submitEvent(SensuEvent(point, eventsTopLevelName))
+        dataPointRelay.submitDataPoint(point)
     }
 
     private val DEFAULT_TAGS = listOf(

@@ -9,6 +9,7 @@ dependencies {
     implementation(Kafka.Apache.clients)
     implementation(Logback.classic)
     implementation(Logstash.logbackEncoder)
+    implementation(Kotlinx.coroutines)
     testImplementation(kotlin("test-junit5"))
     testImplementation(Jjwt.api)
     testImplementation(Jjwt.impl)
