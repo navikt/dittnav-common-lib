@@ -1,7 +1,3 @@
-val junitVersion = "5.4.1"
-val kluentVersion = "1.56"
-
-
 plugins {
     `maven-publish`
     `java-library`
@@ -11,14 +7,15 @@ plugins {
 dependencies {
     api(kotlin("stdlib-jdk8"))
     testImplementation(kotlin("test-junit5"))
-    implementation("org.amshove.kluent:kluent:$kluentVersion")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+    implementation(Kluent.kluent)
+    testRuntimeOnly(Junit.engine)
 
 }
 
 repositories {
     jcenter()
     mavenCentral()
+    mavenLocal()
 }
 
 publishing {

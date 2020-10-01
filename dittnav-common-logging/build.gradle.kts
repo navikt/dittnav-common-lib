@@ -1,7 +1,3 @@
-val logbackVersion = "1.2.3"
-val logstashVersion = "5.2"
-
-
 plugins {
     `maven-publish`
     `java-library`
@@ -31,9 +27,9 @@ publishing {
 }
 
 dependencies {
-    compile(kotlin("stdlib-jdk8"))
-    compile("ch.qos.logback:logback-classic:$logbackVersion")
-    compile("net.logstash.logback:logstash-logback-encoder:$logstashVersion")
+    api(kotlin("stdlib-jdk8"))
+    implementation(Logback.classic)
+    implementation(Logstash.logbackEncoder)
 }
 
 tasks {
