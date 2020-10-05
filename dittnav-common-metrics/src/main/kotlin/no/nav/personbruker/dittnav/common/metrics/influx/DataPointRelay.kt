@@ -13,7 +13,7 @@ internal interface DataPointRelay {
 
 internal object DataPointRelayFactory {
     internal fun createDataPointRelay(sensuConfig: SensuConfig): DataPointRelay {
-        return if (sensuConfig.enableEvenBatching) {
+        return if (sensuConfig.enableEventBatching) {
             BufferedDataPointRelay(sensuConfig)
         } else {
             UnbufferedDataPointRelay(sensuConfig)

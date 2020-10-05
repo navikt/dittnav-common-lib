@@ -7,7 +7,7 @@ data class SensuConfig (
     val applicationName: String,
     val clusterName: String,
     val namespace: String,
-    val enableEvenBatching: Boolean = false,
+    val enableEventBatching: Boolean = false,
     val eventBatchesPerSecond: Int = 3
 ) {
     init {
