@@ -5,6 +5,7 @@ plugins {
 }
 
 repositories {
+    jcenter()
     mavenCentral()
     mavenLocal()
 }
@@ -30,6 +31,11 @@ dependencies {
     api(kotlin("stdlib-jdk8"))
     implementation(Logback.classic)
     implementation(Logstash.logbackEncoder)
+    testImplementation(kotlin("test-junit5"))
+    testImplementation(Junit.api)
+    testImplementation(Junit.engine)
+    testImplementation(Kluent.kluent)
+    testImplementation(Mockk.mockk)
 }
 
 tasks {
@@ -38,5 +44,9 @@ tasks {
     }
     compileTestKotlin {
         kotlinOptions.jvmTarget = "1.8"
+    }
+
+    withType<Test> {
+        useJUnitPlatform()
     }
 }
