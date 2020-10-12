@@ -31,7 +31,7 @@ jobs:
       - name: Generate release tag
         run: |
           export TAG_NAME="$(TZ="Europe/Oslo" date +%Y.%m.%d-%H.%M)-$(echo $GITHUB_SHA | cut -c 1-12)"
-          echo "::set-env name=RELEASE_TAG::$TAG_NAME"
+          echo "RELEASE_TAG=$TAG_NAME" >> $GITHUB_ENV
 
       - name: Compile and run tests
         run: ./gradlew -Plib_version="$(echo $TAG_NAME)" clean build

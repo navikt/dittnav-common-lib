@@ -3,6 +3,10 @@ package no.nav.personbruker.dittnav.common.util.config
 import io.mockk.every
 import io.mockk.mockkObject
 import io.mockk.unmockkObject
+import no.nav.personbruker.dittnav.common.util.config.StringEnvVar.getEnvVar
+import no.nav.personbruker.dittnav.common.util.config.StringEnvVar.getEnvVarAsList
+import no.nav.personbruker.dittnav.common.util.config.StringEnvVar.getOptionalEnvVar
+import no.nav.personbruker.dittnav.common.util.config.StringEnvVar.getOptionalEnvVarAsList
 import org.amshove.kluent.`should equal`
 import org.amshove.kluent.`should throw`
 import org.amshove.kluent.invoking
@@ -11,7 +15,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import java.lang.IllegalStateException
 
-internal class EnvVarKtTest {
+internal class StringEnvVarKtTest {
 
     private val envName = "PROPERTY_NAME"
 
