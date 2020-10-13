@@ -4,7 +4,6 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.slot
 import java.sql.ResultSet
-import java.sql.Timestamp
 
 internal object ResultSetMock {
 
@@ -32,13 +31,6 @@ internal object ResultSetMock {
         }
         every { mock.getLong(capture(labelCaptor)) } answers {
             results[index][labelCaptor.captured]!!.toLong()
-        }
-        every { mock.getBoolean(capture(labelCaptor)) } answers {
-            results[index][labelCaptor.captured]!!.toBoolean()
-        }
-        every { mock.getTimestamp(capture(labelCaptor)) } answers {
-            val time = results[index][labelCaptor.captured]!!
-            Timestamp.valueOf(time)
         }
 
         return mock
