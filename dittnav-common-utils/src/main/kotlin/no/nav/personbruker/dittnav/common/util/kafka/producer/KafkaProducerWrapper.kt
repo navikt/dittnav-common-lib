@@ -19,7 +19,7 @@ class KafkaProducerWrapper<K, V>(
         try {
             kafkaProducer.beginTransaction()
             events.forEach { event ->
-                sendEvent(event)
+                sendSingleEvent(event)
             }
             kafkaProducer.commitTransaction()
         } catch (e: KafkaException) {
@@ -29,6 +29,11 @@ class KafkaProducerWrapper<K, V>(
             kafkaProducer.close()
             throw UnretriableKafkaException("Fant en uventet feil ved sending av eventer til kafka", e)
         }
+    }
+
+    private fun sendSingleEvent(event: RecordKeyValueWrapper<K, V>) {
+        val producerRecord = ProducerRecord(topicName, event.key, event.value)
+        kafkaProducer.send(producerRecord)
     }
 
     fun sendEvent(key: K, event: V) {
@@ -50,10 +55,5 @@ class KafkaProducerWrapper<K, V>(
         } catch (e: Exception) {
             log.warn("Klarte ikke å flushe og lukke produsent. Det kan være eventer som ikke ble produsert.")
         }
-    }
-
-    private fun sendEvent(event: RecordKeyValueWrapper<K, V>) {
-        val producerRecord = ProducerRecord(topicName, event.key, event.value)
-        kafkaProducer.send(producerRecord)
     }
 }
