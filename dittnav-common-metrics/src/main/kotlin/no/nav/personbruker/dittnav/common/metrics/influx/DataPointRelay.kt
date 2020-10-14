@@ -21,26 +21,34 @@ internal object DataPointRelayFactory {
     }
 }
 
-private class UnbufferedDataPointRelay(sensuConfig: SensuConfig): DataPointRelay {
+internal class UnbufferedDataPointRelay (
+    private val sensuClient: SensuClient,
+    private val eventsTopLevelName: String
+): DataPointRelay {
 
-    private val sensuClient = SensuClient(sensuConfig.hostName, sensuConfig.hostPort)
-    private val eventsTopLevelName = sensuConfig.eventsTopLevelName
+    constructor(sensuConfig: SensuConfig) :
+            this(SensuClient(sensuConfig.hostName, sensuConfig.hostPort), sensuConfig.eventsTopLevelName)
+
 
     override suspend fun submitDataPoint(point: Point) {
         sensuClient.submitEvent(SensuEvent(listOf(point), eventsTopLevelName))
     }
 }
 
-private class BufferedDataPointRelay(sensuConfig: SensuConfig): DataPointRelay {
+internal class BufferedDataPointRelay (
+    private val sensuClient: SensuClient,
+    private val eventsTopLevelName: String,
+    batchIntervalMs: Long
+): DataPointRelay {
 
-    private val sensuClient = SensuClient(sensuConfig.hostName, sensuConfig.hostPort)
-    private val eventsTopLevelName = sensuConfig.eventsTopLevelName
+    constructor(sensuConfig: SensuConfig) : this(
+        SensuClient(sensuConfig.hostName, sensuConfig.hostPort),
+        sensuConfig.eventsTopLevelName,
+        1000L / sensuConfig.eventBatchesPerSecond
+    )
 
     private var dataPointBuffer = mutableListOf<Point>()
     private val mutex = Mutex()
-
-    private val batchIntervalMs = 1000L / sensuConfig.eventBatchesPerSecond
-
 
     override suspend fun submitDataPoint(point: Point) = mutex.withLock<Unit> {
         dataPointBuffer.add(point)

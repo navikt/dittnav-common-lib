@@ -11,6 +11,6 @@ data class SensuConfig (
     val eventBatchesPerSecond: Int = 3
 ) {
     init {
-        require(eventBatchesPerSecond in 1..100) { "Batcher sendt per sekund må være mellom inklusive 1 og 100, men var $eventBatchesPerSecond " }
+        require(eventBatchesPerSecond in 1..100) { "Batcher sendt per sekund må være mellom inklusive 1 og 100, men var $eventBatchesPerSecond." }
     }
 }

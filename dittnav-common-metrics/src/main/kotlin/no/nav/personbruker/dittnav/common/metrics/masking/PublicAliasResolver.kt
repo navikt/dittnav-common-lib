@@ -5,12 +5,10 @@ import kotlinx.coroutines.withContext
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.lang.Exception
-import java.time.Duration
 import java.time.LocalDateTime
-import kotlin.math.abs
 
 class PublicAliasResolver(private val aliasMappingProvider: suspend () -> List<NameAndPublicAlias>,
-                          private val cacheLifespan: Long = 15) {
+                          private val cacheLifespanMinutes: Long = 15) {
 
     private var publicNameAliases: Map<String, String> = emptyMap()
     private var timeLastRetrieved: LocalDateTime? = null
@@ -52,6 +50,6 @@ class PublicAliasResolver(private val aliasMappingProvider: suspend () -> List<N
     }
 
     private fun cacheIsExpired(): Boolean {
-        return LocalDateTime.now().isAfter(timeLastRetrieved?.plusMinutes(cacheLifespan))
+        return LocalDateTime.now().isAfter(timeLastRetrieved?.plusMinutes(cacheLifespanMinutes))
     }
 }

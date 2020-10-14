@@ -1,6 +1,6 @@
 package no.nav.personbruker.dittnav.common.util.database.persisting
 
-class PersistActionResult private constructor(
+data class PersistActionResult private constructor(
         val entityId: Int, val wasSuccessful: Boolean, val persistOutcome: PersistFailureReason) {
 
     inline fun onSuccess(action: (Int) -> Unit): PersistActionResult {
