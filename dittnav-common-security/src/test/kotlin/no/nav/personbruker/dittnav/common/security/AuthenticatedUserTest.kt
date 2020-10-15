@@ -1,10 +1,11 @@
 package no.nav.personbruker.dittnav.common.security
 
-import org.amshove.kluent.`should be equal to`
-import org.amshove.kluent.`should contain`
-import org.amshove.kluent.`should not contain`
-import org.amshove.kluent.shouldNotBeNullOrBlank
+import io.ktor.application.*
+import io.mockk.mockk
+import org.amshove.kluent.*
 import org.junit.jupiter.api.Test
+import java.time.Instant
+import java.time.temporal.ChronoUnit
 
 internal class AuthenticatedUserTest {
 
@@ -38,5 +39,28 @@ internal class AuthenticatedUserTest {
         outputOfToString `should contain` authenticatedUser.loginLevel.toString()
         outputOfToString `should not contain` authenticatedUser.ident
         outputOfToString `should not contain` authenticatedUser.token
+    }
+
+    @Test
+    fun `Should recognize when is expired`() {
+        val momentInPast = Instant.now().minus(5, ChronoUnit.MINUTES)
+        val momentInFuture = Instant.now().plus(5, ChronoUnit.MINUTES)
+
+        val expectedExpired = AuthenticatedUser("", 0, "", momentInPast)
+        val expectedNotExpired = AuthenticatedUser("", 0, "", momentInFuture)
+
+        expectedExpired.isTokenExpired() `should be` true
+        expectedNotExpired.isTokenExpired() `should be` false
+    }
+    @Test
+    fun `Should recognize when token expiry is past a certain threshold`() {
+        val moment1 = Instant.now().plus(4, ChronoUnit.MINUTES)
+        val moment2 = Instant.now().plus(6, ChronoUnit.MINUTES)
+
+        val expectedExpiring = AuthenticatedUser("", 0, "", moment1)
+        val expectedNotExpiring = AuthenticatedUser("", 0, "", moment2)
+
+        expectedExpiring.isTokenAboutToExpire(5) `should be` true
+        expectedNotExpiring.isTokenAboutToExpire(5) `should be` false
     }
 }

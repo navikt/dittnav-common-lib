@@ -32,8 +32,6 @@ object AuthenticatedUserObjectMother {
         val expirationTime = token.jwtTokenClaims
                                                 .expirationTime
                                                 .toInstant()
-                                                .atZone(ZoneId.of("Europe/Oslo"))
-                                                .toLocalDateTime()
         return AuthenticatedUser(ident, loginLevel, token.tokenAsString, expirationTime)
     }
 

@@ -13,13 +13,6 @@ import org.amshove.kluent.shouldNotBeNullOrBlank
 internal class AuthenticatedUserFactoryTest {
 
     @Test
-    fun `should throw exception if principal is missing`() {
-        invoking {
-            AuthenticatedUserFactory.createNewAuthenticatedUser(null)
-        } `should throw` Exception::class
-    }
-
-    @Test
     fun `should throw exception if the token context is empty`() {
         val context = TokenValidationContext(emptyMap())
         val principal = TokenValidationContextPrincipal(context)
