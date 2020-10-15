@@ -16,7 +16,7 @@ private object LoggerCache {
         return existingLoggers[className]
             ?: run {
                 val classLogger = LoggerFactory.getLogger(className)
-                existingLoggers
+                existingLoggers[className] = classLogger
                 classLogger
             }
     }
