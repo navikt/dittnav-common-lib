@@ -1,7 +1,6 @@
 plugins {
-    val kotlinVersion = "1.3.71"
-    kotlin("jvm") version kotlinVersion
-    kotlin("plugin.allopen") version kotlinVersion
+    kotlin("jvm") version Kotlin.version
+    kotlin("plugin.allopen") version Kotlin.version
 }
 
 val libraryVersion = properties["lib_version"] ?: "latest-local"

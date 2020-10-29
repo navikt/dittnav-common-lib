@@ -6,17 +6,12 @@ plugins {
 
 dependencies {
     api(kotlin("stdlib-jdk8"))
-    implementation(Logback.classic)
-    implementation(Logstash.logbackEncoder)
-    implementation(Kotlin.reflect)
-    implementation(NAV.tokenValidatorKtor)
+    implementation(Ktor.serverNetty)
     testImplementation(kotlin("test-junit5"))
-    testImplementation(Jjwt.api)
-    testImplementation(Jjwt.impl)
-    testImplementation(Jjwt.jackson)
     testImplementation(Junit.engine)
     testImplementation(Kluent.kluent)
-    testImplementation(Mockk.mockk)
+    testImplementation(Ktor.serverTestHost)
+
 }
 
 repositories {
