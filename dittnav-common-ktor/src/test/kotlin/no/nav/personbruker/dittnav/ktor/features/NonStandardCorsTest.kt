@@ -97,7 +97,7 @@ internal class NonStandardCorsTest {
     }
 
     @Test
-    fun `Wilcard subdomains should not allow origin to be merely a substring of valid host`() = withTestApplication<Unit>({
+    fun `Wildcard subdomains should not allow origin to be merely a substring of valid host`() = withTestApplication<Unit>({
         testApi(host, listOf(scheme), listOf("*"))
     }) {
         val maliciousPrefixCallResponse = corsCall("$scheme://malicious-$host")
@@ -107,6 +107,22 @@ internal class NonStandardCorsTest {
         maliciousPrefixCallResponse.statusCode `should be equal to` HttpStatusCode.Forbidden
         maliciousSuffixCallResponse.statusCode `should be equal to` HttpStatusCode.Forbidden
         maliciousCallResponse.statusCode `should be equal to` HttpStatusCode.Forbidden
+    }
+
+    @Test
+    fun `Should work with localhost origins`() = withTestApplication<Unit>({
+        testApi("localhost:9000", listOf(scheme), listOf("*"))
+    }) {
+
+        val localhost8080Response = corsCall("$scheme://localhost:8080")
+        val localhost8080SubResponse = corsCall("$scheme://subdomain.localhost:8080")
+        val localhost9000Response = corsCall("$scheme://localhost:9000")
+        val localhost9000SubResponse = corsCall("$scheme://subdomain.localhost:9000")
+
+        localhost8080Response.statusCode `should be equal to` HttpStatusCode.Forbidden
+        localhost8080SubResponse.statusCode `should be equal to` HttpStatusCode.Forbidden
+        localhost9000Response.statusCode `should be equal to` HttpStatusCode.OK
+        localhost9000SubResponse.statusCode `should be equal to` HttpStatusCode.OK
     }
 
 
