@@ -280,7 +280,6 @@ class NonStandardCors(configuration: Configuration) {
                 HttpHeaders.Pragma
             )
 
-            @Suppress("unused")
             val CorsSimpleContentTypes: Set<ContentType> =
                 setOf(
                     ContentType.Application.FormUrlEncoded,
@@ -342,7 +341,6 @@ class NonStandardCors(configuration: Configuration) {
             }
         }
 
-        @Suppress("unused")
         fun allowXHttpMethodOverride() {
             header(HttpHeaders.XHttpMethodOverride)
         }

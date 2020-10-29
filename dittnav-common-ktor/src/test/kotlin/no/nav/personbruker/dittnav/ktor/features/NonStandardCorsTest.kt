@@ -16,7 +16,7 @@ internal class NonStandardCorsTest {
     private val otherHost = "other.host"
 
     @Test
-    fun `Should work like standard CORS feature host is wildcard`() = withTestApplication<Unit>({
+    fun `Should work like standard CORS feature when host is wildcard`() = withTestApplication<Unit>({
         testApi("*")
     }) {
         val nonCorsResponse = nonCorsCall()
