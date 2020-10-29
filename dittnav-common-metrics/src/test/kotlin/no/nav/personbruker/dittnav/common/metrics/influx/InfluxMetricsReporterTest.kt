@@ -60,12 +60,12 @@ internal class InfluxMetricsReporterTest {
         val end = System.currentTimeMillis()
 
 
-        resultMeasurement `should equal` measurementName
-        resultFields `should equal` fields
+        resultMeasurement `should be equal to` measurementName
+        resultFields `should be equal to` fields
         resultTags.values `should contain same` listOf(application, cluster, namespace, tagVal)
         resultTime `should be greater or equal to` start
         resultTime `should be less or equal to` end
-        resultPrecision `should equal` TimeUnit.MILLISECONDS
+        resultPrecision `should be equal to` TimeUnit.MILLISECONDS
     }
 
     private inline fun <reified T: Any> Point.getPrivateField(fieldName: String): T {

@@ -2,7 +2,7 @@ package no.nav.personbruker.dittnav.common.util.database.fetching
 
 import io.mockk.every
 import io.mockk.mockk
-import org.amshove.kluent.`should equal`
+import org.amshove.kluent.`should be equal to`
 import org.amshove.kluent.`should throw`
 import org.amshove.kluent.invoking
 import org.junit.jupiter.api.Test
@@ -25,7 +25,7 @@ internal class FetchActionExtensionsKtTest {
             toPerson()
         }
 
-        result `should equal` person1
+        result `should be equal to` person1
     }
 
     @Test
@@ -45,7 +45,7 @@ internal class FetchActionExtensionsKtTest {
             toPerson()
         }
 
-        result `should equal` listOf(person1, person2, person3)
+        result `should be equal to` listOf(person1, person2, person3)
     }
 
     @Test
@@ -58,7 +58,7 @@ internal class FetchActionExtensionsKtTest {
             toPerson()
         }
 
-        result `should equal` emptyList()
+        result `should be equal to` emptyList()
     }
 
     private fun createMockedResultSet(): ResultSet {

@@ -6,7 +6,7 @@ import io.mockk.mockk
 import io.mockk.slot
 import kotlinx.coroutines.runBlocking
 import no.nav.personbruker.dittnav.common.metrics.util.delayUntilTrue
-import org.amshove.kluent.`should equal`
+import org.amshove.kluent.`should be equal to`
 import org.junit.jupiter.api.Test
 
 internal class BufferedDataPointRelayTest {
@@ -40,7 +40,7 @@ internal class BufferedDataPointRelayTest {
         // The 'atMost' value here is a bit arbitrary, but it should suffice. What we want to achieve here
         // is to prove that some batching of data points occurred, while acknowledging potential timing issues
         coVerify (  atMost = dataPoints.size / 2 ) { sensuClient.submitEvent(any()) }
-        pointsSubmitted `should equal` dataPoints.size
+        pointsSubmitted `should be equal to` dataPoints.size
     }
 
     @Test
@@ -62,6 +62,6 @@ internal class BufferedDataPointRelayTest {
             }
         }
 
-        eventSlot.captured.name `should equal` topLevelName
+        eventSlot.captured.name `should be equal to` topLevelName
     }
 }

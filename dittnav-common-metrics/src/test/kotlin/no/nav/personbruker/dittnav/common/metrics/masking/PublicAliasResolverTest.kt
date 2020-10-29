@@ -5,7 +5,7 @@ import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
-import org.amshove.kluent.`should equal`
+import org.amshove.kluent.`should be equal to`
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 
@@ -33,7 +33,7 @@ internal class PublicAliasResolverTest {
             resolver.getProducerNameAlias(name)
         }
 
-        result `should equal` alias
+        result `should be equal to` alias
         coVerify{ provider.invoke() }
     }
 
@@ -48,7 +48,7 @@ internal class PublicAliasResolverTest {
             resolver.getProducerNameAlias(name)
         }
 
-        result `should equal` alias
+        result `should be equal to` alias
         coVerify(exactly = 1){ provider.invoke() }
     }
 
@@ -64,7 +64,7 @@ internal class PublicAliasResolverTest {
             resolver.getProducerNameAlias(otherName)
         }
 
-        result `should equal` null
+        result `should be equal to` null
         coVerify(exactly = 2){ provider.invoke() }
     }
 

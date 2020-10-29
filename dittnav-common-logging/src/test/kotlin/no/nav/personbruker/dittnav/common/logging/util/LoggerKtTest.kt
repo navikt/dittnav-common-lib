@@ -1,7 +1,7 @@
 package no.nav.personbruker.dittnav.common.logging.util
 
 import org.amshove.kluent.`should be`
-import org.amshove.kluent.`should equal`
+import org.amshove.kluent.`should be equal to`
 import org.amshove.kluent.`should not be`
 import org.junit.jupiter.api.Test
 import org.slf4j.LoggerFactory
@@ -36,6 +36,6 @@ internal class LoggerKtTest {
 
         val dummyClass = DummyClass()
 
-        dummyClass.logger.name `should equal` dummyClass.convention.name
+        dummyClass.logger.name `should be equal to` dummyClass.convention.name
     }
 }

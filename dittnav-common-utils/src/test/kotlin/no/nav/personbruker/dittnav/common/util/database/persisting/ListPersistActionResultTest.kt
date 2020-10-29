@@ -1,7 +1,7 @@
 package no.nav.personbruker.dittnav.common.util.database.persisting
 
 import no.nav.personbruker.dittnav.common.util.database.persisting.PersistFailureReason.*
-import org.amshove.kluent.`should equal`
+import org.amshove.kluent.`should be equal to`
 import org.junit.jupiter.api.Test
 
 
@@ -15,9 +15,9 @@ internal class ListPersistActionResultTest {
 
         val result = ListPersistActionResult.mapParamListToResultArray(toPersist, resultArray)
 
-        result.allEntitiesPersisted() `should equal` false
-        result.getPersistedEntitites() `should equal` listOf(1, 2, 4)
-        result.getConflictingEntities() `should equal` listOf(3)
+        result.allEntitiesPersisted() `should be equal to` false
+        result.getPersistedEntitites() `should be equal to` listOf(1, 2, 4)
+        result.getConflictingEntities() `should be equal to` listOf(3)
     }
 
     @Test
@@ -31,8 +31,8 @@ internal class ListPersistActionResultTest {
 
         val result = ListPersistActionResult.mapListOfIndividualResults(resultList)
 
-        result.allEntitiesPersisted() `should equal` false
-        result.getPersistedEntitites() `should equal` listOf(1, 4)
-        result.getConflictingEntities() `should equal` listOf(3)
+        result.allEntitiesPersisted() `should be equal to` false
+        result.getPersistedEntitites() `should be equal to` listOf(1, 4)
+        result.getConflictingEntities() `should be equal to` listOf(3)
     }
 }
