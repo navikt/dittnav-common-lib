@@ -7,7 +7,7 @@ import no.nav.personbruker.dittnav.common.util.config.StringEnvVar.getEnvVar
 import no.nav.personbruker.dittnav.common.util.config.StringEnvVar.getEnvVarAsList
 import no.nav.personbruker.dittnav.common.util.config.StringEnvVar.getOptionalEnvVar
 import no.nav.personbruker.dittnav.common.util.config.StringEnvVar.getOptionalEnvVarAsList
-import org.amshove.kluent.`should equal`
+import org.amshove.kluent.`should be equal to`
 import org.amshove.kluent.`should throw`
 import org.amshove.kluent.invoking
 import org.junit.jupiter.api.AfterEach
@@ -40,7 +40,7 @@ internal class StringEnvVarKtTest {
 
         val result = getEnvVar(envName, default)
 
-        result `should equal` envVal
+        result `should be equal to` envVal
     }
 
     @Test
@@ -51,7 +51,7 @@ internal class StringEnvVarKtTest {
 
         val result = getEnvVar(envName, default)
 
-        result `should equal` default
+        result `should be equal to` default
     }
 
     @Test
@@ -69,7 +69,7 @@ internal class StringEnvVarKtTest {
 
         val result = getOptionalEnvVar(envName, default)
 
-        result `should equal` envVal
+        result `should be equal to` envVal
     }
 
     @Test
@@ -80,7 +80,7 @@ internal class StringEnvVarKtTest {
 
         val result = getOptionalEnvVar(envName, default)
 
-        result `should equal` default
+        result `should be equal to` default
     }
 
     @Test
@@ -89,7 +89,7 @@ internal class StringEnvVarKtTest {
 
         val result = getOptionalEnvVar(envName)
 
-        result `should equal` null
+        result `should be equal to` null
     }
 
     @Test
@@ -102,7 +102,7 @@ internal class StringEnvVarKtTest {
 
         val result = getEnvVarAsList(envName, default)
 
-        result `should equal` expected
+        result `should be equal to` expected
     }
 
     @Test
@@ -113,7 +113,7 @@ internal class StringEnvVarKtTest {
 
         val result = getEnvVarAsList(envName, default)
 
-        result `should equal` default
+        result `should be equal to` default
     }
 
     @Test
@@ -133,9 +133,9 @@ internal class StringEnvVarKtTest {
         val expectedPipe = listOf("one", "two.three", "four")
         val expectedDot = listOf("one|two", "three|four")
 
-        getEnvVarAsList(envName) `should equal` expectedDefault
-        getEnvVarAsList(envName, separator = "|") `should equal` expectedPipe
-        getEnvVarAsList(envName, separator = ".") `should equal` expectedDot
+        getEnvVarAsList(envName) `should be equal to` expectedDefault
+        getEnvVarAsList(envName, separator = "|") `should be equal to` expectedPipe
+        getEnvVarAsList(envName, separator = ".") `should be equal to` expectedDot
     }
 
     @Test
@@ -148,7 +148,7 @@ internal class StringEnvVarKtTest {
 
         val result = getOptionalEnvVarAsList(envName, default)
 
-        result `should equal` expected
+        result `should be equal to` expected
     }
 
     @Test
@@ -159,7 +159,7 @@ internal class StringEnvVarKtTest {
 
         val result = getOptionalEnvVarAsList(envName, default)
 
-        result `should equal` default
+        result `should be equal to` default
     }
 
     @Test
@@ -168,7 +168,7 @@ internal class StringEnvVarKtTest {
 
         val result = getOptionalEnvVarAsList(envName)
 
-        result `should equal` emptyList()
+        result `should be equal to` emptyList()
     }
 
     @Test
@@ -181,8 +181,8 @@ internal class StringEnvVarKtTest {
         val expectedPipe = listOf("one", "two.three", "four")
         val expectedDot = listOf("one|two", "three|four")
 
-        getOptionalEnvVarAsList(envName) `should equal` expectedDefault
-        getOptionalEnvVarAsList(envName, separator = "|") `should equal` expectedPipe
-        getOptionalEnvVarAsList(envName, separator = ".") `should equal` expectedDot
+        getOptionalEnvVarAsList(envName) `should be equal to` expectedDefault
+        getOptionalEnvVarAsList(envName, separator = "|") `should be equal to` expectedPipe
+        getOptionalEnvVarAsList(envName, separator = ".") `should be equal to` expectedDot
     }
 }

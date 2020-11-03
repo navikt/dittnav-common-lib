@@ -8,6 +8,7 @@ dependencies {
     api(kotlin("stdlib-jdk8"))
     implementation(Logback.classic)
     implementation(Logstash.logbackEncoder)
+    implementation(Kotlin.reflect)
     implementation(NAV.tokenValidatorKtor)
     testImplementation(kotlin("test-junit5"))
     testImplementation(Jjwt.api)

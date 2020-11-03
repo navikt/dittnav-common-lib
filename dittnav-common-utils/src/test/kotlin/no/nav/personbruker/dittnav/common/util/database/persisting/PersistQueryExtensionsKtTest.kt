@@ -5,7 +5,7 @@ import io.mockk.mockk
 import io.mockk.slot
 import io.mockk.verifyOrder
 import org.amshove.kluent.`should contain`
-import org.amshove.kluent.`should equal`
+import org.amshove.kluent.`should be equal to`
 import org.amshove.kluent.`should not be equal to`
 import org.junit.jupiter.api.Test
 import java.sql.Connection
@@ -43,7 +43,7 @@ internal class PersistQueryExtensionsKtTest {
             statement.close()
         }
 
-        result `should equal` expected
+        result `should be equal to` expected
     }
     @Test
     fun `Function executePersistQuery should return error result if no change was made`() {
@@ -65,7 +65,7 @@ internal class PersistQueryExtensionsKtTest {
             statement.close()
         }
 
-        result `should equal` expected
+        result `should be equal to` expected
     }
 
     @Test
@@ -79,7 +79,7 @@ internal class PersistQueryExtensionsKtTest {
         every { statement.close() } returns Unit
 
         connection.executePersistQuery(query, false) { paramInit() }
-        queryCapture.captured `should equal` query
+        queryCapture.captured `should be equal to` query
 
         connection.executePersistQuery(query, true) { paramInit() }
         queryCapture.captured `should not be equal to` query
@@ -108,7 +108,7 @@ internal class PersistQueryExtensionsKtTest {
             connection.commit()
         }
 
-        result `should equal` persistResult
+        result `should be equal to` persistResult
     }
 
     @Test
@@ -125,7 +125,7 @@ internal class PersistQueryExtensionsKtTest {
         every { connection.commit() } returns Unit
 
         connection.executeBatchPersistQuery(query, false) { paramInit() }
-        queryCapture.captured `should equal` query
+        queryCapture.captured `should be equal to` query
 
         connection.executeBatchPersistQuery(query, true) { paramInit() }
         queryCapture.captured `should not be equal to` query

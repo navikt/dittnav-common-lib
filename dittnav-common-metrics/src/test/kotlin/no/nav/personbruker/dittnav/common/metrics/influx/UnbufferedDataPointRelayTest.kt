@@ -6,7 +6,7 @@ import io.mockk.mockk
 import io.mockk.slot
 import kotlinx.coroutines.runBlocking
 import no.nav.personbruker.dittnav.common.metrics.influx.InfluxDataPointObjectMother.createSimplePointsForMeasurents
-import org.amshove.kluent.`should equal`
+import org.amshove.kluent.`should be equal to`
 import org.junit.jupiter.api.Test
 
 internal class UnbufferedDataPointRelayTest {
@@ -43,7 +43,7 @@ internal class UnbufferedDataPointRelayTest {
             dataPointRelay.submitDataPoint(dataPoint)
         }
 
-        eventSlot.captured.name `should equal` topLevelName
+        eventSlot.captured.name `should be equal to` topLevelName
      }
 
 

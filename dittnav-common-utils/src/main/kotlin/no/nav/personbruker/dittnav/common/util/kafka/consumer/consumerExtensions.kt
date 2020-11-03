@@ -4,9 +4,8 @@ import org.apache.kafka.clients.consumer.ConsumerRecords
 import org.apache.kafka.clients.consumer.KafkaConsumer
 
 fun <K, V> KafkaConsumer<K, V>.rollbackToLastCommitted() {
-    assignment().forEach { partition ->
-        val lastCommitted = committed(partition)
-        seek(partition, lastCommitted.offset())
+    committed(assignment()).forEach { (partition, metadata) ->
+        seek(partition, metadata.offset())
     }
 }
 

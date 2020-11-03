@@ -7,7 +7,7 @@ import no.nav.personbruker.dittnav.common.util.config.TypedEnvVar.getEnvVarAsTyp
 import no.nav.personbruker.dittnav.common.util.config.TypedEnvVar.getEnvVarAsTypedList
 import no.nav.personbruker.dittnav.common.util.config.TypedEnvVar.getOptionalEnvVarAsType
 import no.nav.personbruker.dittnav.common.util.config.TypedEnvVar.getOptionalEnvVarAsTypedList
-import org.amshove.kluent.`should equal`
+import org.amshove.kluent.`should be equal to`
 import org.amshove.kluent.`should throw`
 import org.amshove.kluent.invoking
 import org.junit.jupiter.api.AfterEach
@@ -43,7 +43,7 @@ internal class EnvVarAsTypeKtTest {
 
         val result = getEnvVarAsType(envName, String::toInt, default)
 
-        result `should equal` envVal
+        result `should be equal to` envVal
     }
 
     @Test
@@ -54,7 +54,7 @@ internal class EnvVarAsTypeKtTest {
 
         val result = getEnvVarAsType(envName, String::toInt, default)
 
-        result `should equal` default
+        result `should be equal to` default
     }
 
     @Test
@@ -79,7 +79,7 @@ internal class EnvVarAsTypeKtTest {
 
         val result = getOptionalEnvVarAsType(envName, String::toInt, default)
 
-        result `should equal` envVal
+        result `should be equal to` envVal
     }
 
     @Test
@@ -90,7 +90,7 @@ internal class EnvVarAsTypeKtTest {
 
         val result = getOptionalEnvVarAsType(envName, String::toInt, default)
 
-        result `should equal` default
+        result `should be equal to` default
     }
 
     @Test
@@ -99,7 +99,7 @@ internal class EnvVarAsTypeKtTest {
 
         val result = getOptionalEnvVarAsType(envName, String::toInt)
 
-        result `should equal` null
+        result `should be equal to` null
     }
 
     @Test
@@ -117,7 +117,7 @@ internal class EnvVarAsTypeKtTest {
 
         val result = getEnvVarAsTypedList(envName, String::toInt, default)
 
-        result `should equal` listEnvVal
+        result `should be equal to` listEnvVal
     }
 
     @Test
@@ -128,7 +128,7 @@ internal class EnvVarAsTypeKtTest {
 
         val result = getEnvVarAsTypedList(envName, String::toInt, default)
 
-        result `should equal` default
+        result `should be equal to` default
     }
 
     @Test
@@ -153,7 +153,7 @@ internal class EnvVarAsTypeKtTest {
 
         val expected = listOf(4, 5, 6)
 
-        getEnvVarAsTypedList(envName, String::toInt, separator = "|") `should equal` expected
+        getEnvVarAsTypedList(envName, String::toInt, separator = "|") `should be equal to` expected
     }
 
     @Test
@@ -164,7 +164,7 @@ internal class EnvVarAsTypeKtTest {
 
         val result = getOptionalEnvVarAsTypedList(envName, String::toInt, default)
 
-        result `should equal` listEnvVal
+        result `should be equal to` listEnvVal
     }
 
     @Test
@@ -175,7 +175,7 @@ internal class EnvVarAsTypeKtTest {
 
         val result = getOptionalEnvVarAsTypedList(envName, String::toInt, default)
 
-        result `should equal` default
+        result `should be equal to` default
     }
 
     @Test
@@ -184,7 +184,7 @@ internal class EnvVarAsTypeKtTest {
 
         val result = getOptionalEnvVarAsTypedList(envName, String::toInt)
 
-        result `should equal` emptyList()
+        result `should be equal to` emptyList()
     }
 
     @Test
@@ -202,6 +202,6 @@ internal class EnvVarAsTypeKtTest {
 
         val expected = listOf(7, 8, 9)
 
-        getOptionalEnvVarAsTypedList(envName, String::toInt, separator = "|") `should equal` expected
+        getOptionalEnvVarAsTypedList(envName, String::toInt, separator = "|") `should be equal to` expected
     }
 }

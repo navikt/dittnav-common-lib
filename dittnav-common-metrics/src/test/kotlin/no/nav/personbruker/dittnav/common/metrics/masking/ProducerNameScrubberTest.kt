@@ -4,7 +4,7 @@ import io.mockk.clearMocks
 import io.mockk.coEvery
 import io.mockk.mockk
 import kotlinx.coroutines.runBlocking
-import org.amshove.kluent.`should equal`
+import org.amshove.kluent.`should be equal to`
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 
@@ -35,7 +35,7 @@ internal class ProducerNameScrubberTest {
             producerNameScrubber.getPublicAlias(user)
         }
 
-        result `should equal` alias
+        result `should be equal to` alias
     }
 
     @Test
@@ -46,7 +46,7 @@ internal class ProducerNameScrubberTest {
             producerNameScrubber.getPublicAlias(user)
         }
 
-        result `should equal` fallbackName
+        result `should be equal to` fallbackName
     }
 
     @Test
@@ -57,7 +57,7 @@ internal class ProducerNameScrubberTest {
             producerNameScrubber.getPublicAlias(sysUser)
         }
 
-        result `should equal` sysUserFallbackName
+        result `should be equal to` sysUserFallbackName
     }
 
     @Test
@@ -70,6 +70,6 @@ internal class ProducerNameScrubberTest {
             producerNameScrubber.getPublicAlias(name)
         }
 
-        result `should equal` fallbackName
+        result `should be equal to` fallbackName
     }
 }
