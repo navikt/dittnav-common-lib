@@ -7,14 +7,14 @@ import no.nav.personbruker.dittnav.common.util.config.TypedEnvVar.getOptionalEnv
 
 object IntEnvVar {
     fun getEnvVarAsInt(varName: String, default: Int? = null): Int
-            = getEnvVarAsType(varName, String::toInt, default)
+            = getEnvVarAsType(varName, default, String::toInt)
 
     fun getOptionalEnvVarAsInt(varName: String, default: Int? = null): Int?
-            = getOptionalEnvVarAsType(varName, String::toInt, default)
+            = getOptionalEnvVarAsType(varName, default, String::toInt)
 
     fun getEnvVarAsIntList(varName: String, default: List<Int>? = null, separator: String = ","): List<Int>
-            = getEnvVarAsTypedList(varName, String::toInt, default, separator)
+            = getEnvVarAsTypedList(varName, default, separator, String::toInt)
 
     fun getOptionalEnvVarAsIntList(varName: String, default: List<Int>? = null, separator: String = ","): List<Int>
-            = getOptionalEnvVarAsTypedList(varName, String::toInt, default, separator)
+            = getOptionalEnvVarAsTypedList(varName, default, separator, String::toInt)
 }

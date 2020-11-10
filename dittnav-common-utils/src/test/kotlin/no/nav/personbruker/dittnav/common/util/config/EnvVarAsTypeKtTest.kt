@@ -41,7 +41,7 @@ internal class EnvVarAsTypeKtTest {
 
         every { SystemWrapper.getEnvVar(envName) } returns rawEnvVal
 
-        val result = getEnvVarAsType(envName, String::toInt, default)
+        val result = getEnvVarAsType(envName, default, String::toInt)
 
         result `should be equal to` envVal
     }
@@ -52,7 +52,7 @@ internal class EnvVarAsTypeKtTest {
 
         every { SystemWrapper.getEnvVar(envName) } returns null
 
-        val result = getEnvVarAsType(envName, String::toInt, default)
+        val result = getEnvVarAsType(envName, default, String::toInt)
 
         result `should be equal to` default
     }
@@ -61,14 +61,14 @@ internal class EnvVarAsTypeKtTest {
     fun `Function getEnvVarAsType should throw exception if variable was not found and no default was specified`() {
         every { SystemWrapper.getEnvVar(envName) } returns null
 
-        invoking { getEnvVarAsType(envName, String::toInt) } `should throw` IllegalStateException::class
+        invoking { getEnvVarAsType(envName, mapper = String::toInt) } `should throw` IllegalStateException::class
     }
 
     @Test
     fun `Function getEnvVarAsType should throw exception if variable could not be mapped`() {
         every { SystemWrapper.getEnvVar(envName) } returns "onetwothree"
 
-        invoking { getEnvVarAsType(envName, String::toInt) } `should throw` IllegalArgumentException::class
+        invoking { getEnvVarAsType(envName, mapper = String::toInt) } `should throw` IllegalArgumentException::class
     }
 
     @Test
@@ -77,7 +77,7 @@ internal class EnvVarAsTypeKtTest {
 
         every { SystemWrapper.getEnvVar(envName) } returns rawEnvVal
 
-        val result = getOptionalEnvVarAsType(envName, String::toInt, default)
+        val result = getOptionalEnvVarAsType(envName, default, String::toInt)
 
         result `should be equal to` envVal
     }
@@ -88,7 +88,7 @@ internal class EnvVarAsTypeKtTest {
 
         every { SystemWrapper.getEnvVar(envName) } returns null
 
-        val result = getOptionalEnvVarAsType(envName, String::toInt, default)
+        val result = getOptionalEnvVarAsType(envName, default, String::toInt)
 
         result `should be equal to` default
     }
@@ -97,7 +97,7 @@ internal class EnvVarAsTypeKtTest {
     fun `Function getOptionalEnvVarAsType should return null if variable was not found and no default was specified`() {
         every { SystemWrapper.getEnvVar(envName) } returns null
 
-        val result = getOptionalEnvVarAsType(envName, String::toInt)
+        val result = getOptionalEnvVarAsType(envName, mapper = String::toInt)
 
         result `should be equal to` null
     }
@@ -106,7 +106,7 @@ internal class EnvVarAsTypeKtTest {
     fun `Function getOptionalEnvVarAsType should throw exception if variable could not be mapped`() {
         every { SystemWrapper.getEnvVar(envName) } returns "onetwo"
 
-        invoking { getEnvVarAsType(envName, String::toInt) } `should throw` IllegalArgumentException::class
+        invoking { getEnvVarAsType(envName, mapper = String::toInt) } `should throw` IllegalArgumentException::class
     }
 
     @Test
@@ -115,7 +115,7 @@ internal class EnvVarAsTypeKtTest {
 
         every { SystemWrapper.getEnvVar(envName) } returns rawListEnvVal
 
-        val result = getEnvVarAsTypedList(envName, String::toInt, default)
+        val result = getEnvVarAsTypedList(envName, default, mapper = String::toInt)
 
         result `should be equal to` listEnvVal
     }
@@ -126,7 +126,7 @@ internal class EnvVarAsTypeKtTest {
 
         every { SystemWrapper.getEnvVar(envName) } returns null
 
-        val result = getEnvVarAsTypedList(envName, String::toInt, default)
+        val result = getEnvVarAsTypedList(envName, default, mapper = String::toInt)
 
         result `should be equal to` default
     }
@@ -135,14 +135,14 @@ internal class EnvVarAsTypeKtTest {
     fun `Function getEnvVarAsTypedList should throw exception if variable was not found and no default was specified`() {
         every { SystemWrapper.getEnvVar(envName) } returns null
 
-        invoking { getEnvVarAsTypedList(envName, String::toInt) } `should throw` IllegalStateException::class
+        invoking { getEnvVarAsTypedList(envName, mapper = String::toInt) } `should throw` IllegalStateException::class
     }
 
     @Test
     fun `Function getEnvVarAsTypedList should throw exception if variable could not be mapped`() {
         every { SystemWrapper.getEnvVar(envName) } returns "one,two"
 
-        invoking { getEnvVarAsTypedList(envName, String::toInt) } `should throw` IllegalArgumentException::class
+        invoking { getEnvVarAsTypedList(envName, mapper = String::toInt) } `should throw` IllegalArgumentException::class
     }
 
     @Test
@@ -153,7 +153,7 @@ internal class EnvVarAsTypeKtTest {
 
         val expected = listOf(4, 5, 6)
 
-        getEnvVarAsTypedList(envName, String::toInt, separator = "|") `should be equal to` expected
+        getEnvVarAsTypedList(envName, separator = "|", mapper = String::toInt) `should be equal to` expected
     }
 
     @Test
@@ -162,7 +162,7 @@ internal class EnvVarAsTypeKtTest {
 
         every { SystemWrapper.getEnvVar(envName) } returns rawListEnvVal
 
-        val result = getOptionalEnvVarAsTypedList(envName, String::toInt, default)
+        val result = getOptionalEnvVarAsTypedList(envName, default, mapper = String::toInt)
 
         result `should be equal to` listEnvVal
     }
@@ -173,7 +173,7 @@ internal class EnvVarAsTypeKtTest {
 
         every { SystemWrapper.getEnvVar(envName) } returns null
 
-        val result = getOptionalEnvVarAsTypedList(envName, String::toInt, default)
+        val result = getOptionalEnvVarAsTypedList(envName, default, mapper = String::toInt)
 
         result `should be equal to` default
     }
@@ -182,7 +182,7 @@ internal class EnvVarAsTypeKtTest {
     fun `Function getOptionalEnvVarAsTypedList should return empty list if variable was not found and no default was specified`() {
         every { SystemWrapper.getEnvVar(envName) } returns null
 
-        val result = getOptionalEnvVarAsTypedList(envName, String::toInt)
+        val result = getOptionalEnvVarAsTypedList(envName, mapper = String::toInt)
 
         result `should be equal to` emptyList()
     }
@@ -191,7 +191,7 @@ internal class EnvVarAsTypeKtTest {
     fun `Function getOptionalEnvVarAsTypedList should throw exception if variable could not be mapped`() {
         every { SystemWrapper.getEnvVar(envName) } returns "one,two"
 
-        invoking { getOptionalEnvVarAsTypedList(envName, String::toInt) } `should throw` IllegalArgumentException::class
+        invoking { getOptionalEnvVarAsTypedList(envName, mapper = String::toInt) } `should throw` IllegalArgumentException::class
     }
 
     @Test
@@ -202,6 +202,6 @@ internal class EnvVarAsTypeKtTest {
 
         val expected = listOf(7, 8, 9)
 
-        getOptionalEnvVarAsTypedList(envName, String::toInt, separator = "|") `should be equal to` expected
+        getOptionalEnvVarAsTypedList(envName, separator = "|", mapper = String::toInt) `should be equal to` expected
     }
 }

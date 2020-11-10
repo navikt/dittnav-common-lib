@@ -5,20 +5,25 @@ import java.lang.IllegalArgumentException
 import java.lang.IllegalStateException
 
 internal object TypedEnvVar {
-    internal inline fun <reified T> getEnvVarAsType(varName: String, mapper: (String) -> T, default: T? = null): T {
+    internal inline fun <reified T> getEnvVarAsType(varName: String, default: T? = null, mapper: (String) -> T): T {
         return SystemWrapper.getEnvVar(varName)
             ?.applyMapper(mapper)
             ?: default
             ?: throw IllegalStateException("Appen kan ikke starte uten av miljøvariabelen $varName er satt.")
     }
 
-    internal inline fun <reified T> getOptionalEnvVarAsType(varName: String, mapper: (String) -> T, default: T? = null): T? {
+    internal inline fun <reified T> getOptionalEnvVarAsType(varName: String, default: T? = null, mapper: (String) -> T): T? {
         return SystemWrapper.getEnvVar(varName)
             ?.applyMapper(mapper)
             ?: default
     }
 
-    internal inline fun <reified T> getEnvVarAsTypedList(varName: String, mapper: (String) -> T, default: List<T>? = null, separator: String = ","): List<T> {
+    internal inline fun <reified T> getEnvVarAsTypedList(
+        varName: String,
+        default: List<T>? = null,
+        separator: String = ",",
+        mapper: (String) -> T
+    ): List<T> {
         return SystemWrapper.getEnvVar(varName)
             ?.split(separator)
             ?.map { listEntry -> listEntry.applyMapper(mapper) }
@@ -26,7 +31,12 @@ internal object TypedEnvVar {
             ?: throw IllegalStateException("Appen kan ikke starte uten av miljøvariabelen $varName er satt.")
     }
 
-    internal inline fun <reified T> getOptionalEnvVarAsTypedList(varName: String, mapper: (String) -> T, default: List<T>? = null, separator: String = ","): List<T> {
+    internal inline fun <reified T> getOptionalEnvVarAsTypedList(
+        varName: String,
+        default: List<T>? = null,
+        separator: String = ",",
+        mapper: (String) -> T
+    ): List<T> {
         return SystemWrapper.getEnvVar(varName)
             ?.split(separator)
             ?.map { listEntry -> listEntry.applyMapper(mapper) }

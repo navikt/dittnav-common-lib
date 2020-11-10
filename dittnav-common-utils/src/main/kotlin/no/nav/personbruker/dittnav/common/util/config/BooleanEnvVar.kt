@@ -7,14 +7,14 @@ import no.nav.personbruker.dittnav.common.util.config.TypedEnvVar.getOptionalEnv
 
 object BooleanEnvVar {
     fun getEnvVarAsBoolean(varName: String, default: Boolean? = null): Boolean
-            = getEnvVarAsType(varName, String::toBoolean, default)
+            = getEnvVarAsType(varName, default, String::toBoolean)
 
     fun getOptionalEnvVarAsBoolean(varName: String, default: Boolean? = null): Boolean?
-            = getOptionalEnvVarAsType(varName, String::toBoolean, default)
+            = getOptionalEnvVarAsType(varName, default, String::toBoolean)
 
     fun getEnvVarAsBooleanList(varName: String, default: List<Boolean>? = null, separator: String = ","): List<Boolean>
-            = getEnvVarAsTypedList(varName, String::toBoolean, default, separator)
+            = getEnvVarAsTypedList(varName, default, separator, String::toBoolean)
 
     fun getOptionalEnvVarAsBooleanList(varName: String, default: List<Boolean>? = null, separator: String = ","): List<Boolean>
-            = getOptionalEnvVarAsTypedList(varName, String::toBoolean, default, separator)
+            = getOptionalEnvVarAsTypedList(varName, default, separator, String::toBoolean)
 }

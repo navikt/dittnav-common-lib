@@ -7,14 +7,14 @@ import no.nav.personbruker.dittnav.common.util.config.TypedEnvVar.getOptionalEnv
 
 object LongEnvVar {
     fun getEnvVarAsLong(varName: String, default: Long? = null): Long
-            = getEnvVarAsType(varName, String::toLong, default)
+            = getEnvVarAsType(varName, default, String::toLong)
 
     fun getOptionalEnvVarAsLong(varName: String, default: Long? = null): Long?
-            = getOptionalEnvVarAsType(varName, String::toLong, default)
+            = getOptionalEnvVarAsType(varName, default, String::toLong)
 
     fun getEnvVarAsLongList(varName: String, default: List<Long>? = null, separator: String = ","): List<Long>
-            = getEnvVarAsTypedList(varName, String::toLong, default, separator)
+            = getEnvVarAsTypedList(varName, default, separator, String::toLong)
 
     fun getOptionalEnvVarAsLongList(varName: String, default: List<Long>? = null, separator: String = ","): List<Long>
-            = getOptionalEnvVarAsTypedList(varName, String::toLong, default, separator)
+            = getOptionalEnvVarAsTypedList(varName, default, separator, String::toLong)
 }
