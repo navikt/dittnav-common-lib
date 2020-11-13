@@ -6,6 +6,8 @@ plugins {
 
 dependencies {
     api(kotlin("stdlib-jdk8"))
+    implementation(Kafka.Confluent.avroSerializer)
+    implementation(Kafka.Confluent.schemaRegistry)
     implementation(Kafka.Apache.clients)
     implementation(Logback.classic)
     implementation(Logstash.logbackEncoder)
@@ -22,6 +24,8 @@ dependencies {
 repositories {
     jcenter()
     mavenCentral()
+    maven("https://packages.confluent.io/maven")
+    maven("https://jitpack.io")
 }
 
 publishing {
