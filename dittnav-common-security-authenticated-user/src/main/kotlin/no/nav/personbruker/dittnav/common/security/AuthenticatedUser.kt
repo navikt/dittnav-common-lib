@@ -16,7 +16,7 @@ data class AuthenticatedUser (
     }
 
     override fun toString(): String {
-        return "AuthenticatedUser(ident='***', loginLevel=$loginLevel, token='***', expiryTime=$tokenExpirationTime)"
+        return "AuthenticatedUser(ident='***', loginLevel=$loginLevel, token='***', expiryTime=$tokenExpirationTime, expired=${isTokenExpired()})"
     }
 
     fun isTokenExpired(): Boolean {
