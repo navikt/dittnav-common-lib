@@ -16,7 +16,7 @@ data class AuthenticatedUser (
     }
 
     override fun toString(): String {
-        return "AuthenticatedUser(ident='***', loginLevel=$loginLevel, token='***', expiryTime=$tokenExpirationTime)"
+        return "AuthenticatedUser(ident='***', loginLevel=$loginLevel, token='***', expiryTime=$tokenExpirationTime, expired=${isTokenExpired()})"
     }
 
     fun isTokenExpired(): Boolean {
@@ -24,8 +24,8 @@ data class AuthenticatedUser (
         return tokenExpirationTime.isBefore(now)
     }
 
-    fun isTokenAboutToExpire(expiryThresholdInMinutes: Long): Boolean {
+    fun isTokenAboutToExpire(expiryThresholdInSeconds: Long): Boolean {
         val now = Instant.now()
-        return now.isAfter(tokenExpirationTime.minus(expiryThresholdInMinutes, ChronoUnit.MINUTES))
+        return now.isAfter(tokenExpirationTime.minus(expiryThresholdInSeconds, ChronoUnit.SECONDS))
     }
 }
