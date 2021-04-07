@@ -24,8 +24,8 @@ data class AuthenticatedUser (
         return tokenExpirationTime.isBefore(now)
     }
 
-    fun isTokenAboutToExpire(expiryThresholdInMinutes: Long): Boolean {
+    fun isTokenAboutToExpire(expiryThresholdInSeconds: Long): Boolean {
         val now = Instant.now()
-        return now.isAfter(tokenExpirationTime.minus(expiryThresholdInMinutes, ChronoUnit.MINUTES))
+        return now.isAfter(tokenExpirationTime.minus(expiryThresholdInSeconds, ChronoUnit.SECONDS))
     }
 }

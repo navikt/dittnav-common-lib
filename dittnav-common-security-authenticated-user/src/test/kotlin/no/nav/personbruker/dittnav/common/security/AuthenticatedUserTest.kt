@@ -1,7 +1,5 @@
 package no.nav.personbruker.dittnav.common.security
 
-import io.ktor.application.*
-import io.mockk.mockk
 import org.amshove.kluent.*
 import org.junit.jupiter.api.Test
 import java.time.Instant
@@ -52,6 +50,7 @@ internal class AuthenticatedUserTest {
         expectedExpired.isTokenExpired() `should be` true
         expectedNotExpired.isTokenExpired() `should be` false
     }
+
     @Test
     fun `Should recognize when token expiry is past a certain threshold`() {
         val moment1 = Instant.now().plus(4, ChronoUnit.MINUTES)
@@ -60,7 +59,9 @@ internal class AuthenticatedUserTest {
         val expectedExpiring = AuthenticatedUser("", 0, "", moment1)
         val expectedNotExpiring = AuthenticatedUser("", 0, "", moment2)
 
-        expectedExpiring.isTokenAboutToExpire(5) `should be` true
-        expectedNotExpiring.isTokenAboutToExpire(5) `should be` false
+        val fiveMinutesInSeconds: Long = 5 * 60
+        expectedExpiring.isTokenAboutToExpire(fiveMinutesInSeconds) `should be` true
+        expectedNotExpiring.isTokenAboutToExpire(fiveMinutesInSeconds) `should be` false
     }
+
 }
