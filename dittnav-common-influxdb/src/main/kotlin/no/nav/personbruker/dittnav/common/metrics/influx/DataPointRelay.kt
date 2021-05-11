@@ -28,6 +28,8 @@ internal object DataPointRelayFactory {
             influxConfig.password
         )
 
+        influxDb.setDatabase(influxConfig.databaseName)
+
         if (influxConfig.enableEventBatching) {
             influxDb.enableBatch()
         } else {
