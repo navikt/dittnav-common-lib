@@ -6,6 +6,7 @@ data class InfluxConfig (
     val password: String,
     val hostPort: Int,
     val databaseName: String,
+    val retentionPolicyName: String,
     val applicationName: String,
     val clusterName: String,
     val namespace: String,

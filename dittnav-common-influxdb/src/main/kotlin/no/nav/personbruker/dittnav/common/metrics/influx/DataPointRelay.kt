@@ -21,6 +21,7 @@ internal class DataPointRelay(private val influxDB: InfluxDB) {
 }
 
 internal object DataPointRelayFactory {
+
     internal fun createDataPointRelay(influxConfig: InfluxConfig): DataPointRelay {
         val influxDb = InfluxDBFactory.connect(
             "https://${influxConfig.hostName}:${influxConfig.hostPort}",
@@ -29,6 +30,8 @@ internal object DataPointRelayFactory {
         )
 
         influxDb.setDatabase(influxConfig.databaseName)
+
+        influxDb.setRetentionPolicy(influxConfig.retentionPolicyName)
 
         if (influxConfig.enableEventBatching) {
             influxDb.enableBatch()
