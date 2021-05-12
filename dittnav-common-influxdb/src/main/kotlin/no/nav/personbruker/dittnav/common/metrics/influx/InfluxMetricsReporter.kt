@@ -10,7 +10,7 @@ class InfluxMetricsReporter internal constructor(influxConfig: InfluxConfig, pri
 
     override suspend fun registerDataPoint(measurementName: String, fields: Map<String, Any>, tags: Map<String, String>) {
         val point = Point.measurement(measurementName)
-                .time(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
+                .time(System.currentTimeMillis() * 1000, TimeUnit.NANOSECONDS)
                 .tag(tags)
                 .tag(DEFAULT_TAGS)
                 .fields(fields)
