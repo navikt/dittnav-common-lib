@@ -1,4 +1,4 @@
-package no.nav.personbruker.dittnav.common.metrics.influx
+package no.nav.personbruker.dittnav.common.metrics.influxdb
 
 import io.mockk.coEvery
 import io.mockk.mockk
@@ -12,18 +12,25 @@ import java.util.concurrent.TimeUnit
 internal class InfluxMetricsReporterTest {
     val dataPointRelay: DataPointRelay = mockk()
 
+    val databaseName = "testdb"
+    val retentionPolicyName = "retention"
     val application = "testApp"
     val cluster = "test"
     val namespace = "test1"
 
-    val sensuConfig = InfluxConfig(
-        "", 0, "",
+    val influxConfig = InfluxConfig(
+        "",
+        "",
+        "",
+        0,
+        databaseName,
+        retentionPolicyName,
         application,
         cluster,
         namespace
     )
 
-    val metricsReporter = InfluxMetricsReporter(sensuConfig, dataPointRelay)
+    val metricsReporter = InfluxMetricsReporter(influxConfig, dataPointRelay)
 
     @Test
     fun `Should construct a data point and add time of measurement and application-global tags`() {

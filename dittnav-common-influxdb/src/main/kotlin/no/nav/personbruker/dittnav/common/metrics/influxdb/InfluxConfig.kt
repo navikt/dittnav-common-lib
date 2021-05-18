@@ -1,4 +1,4 @@
-package no.nav.personbruker.dittnav.common.metrics.influx
+package no.nav.personbruker.dittnav.common.metrics.influxdb
 
 data class InfluxConfig (
     val hostName: String,

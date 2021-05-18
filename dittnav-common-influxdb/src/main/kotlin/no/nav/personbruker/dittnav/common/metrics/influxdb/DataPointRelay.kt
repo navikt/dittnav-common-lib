@@ -1,4 +1,4 @@
-package no.nav.personbruker.dittnav.common.metrics.influx
+package no.nav.personbruker.dittnav.common.metrics.influxdb
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
