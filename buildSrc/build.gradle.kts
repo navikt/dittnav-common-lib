@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     `kotlin-dsl`
 }
@@ -7,8 +9,7 @@ repositories {
     maven("https://jitpack.io")
 }
 
-val dittNavDependenciesVersion = "2020.10.29-14.45-1531b0140397"
 
-dependencies {
-    implementation("com.github.navikt:dittnav-dependencies:$dittNavDependenciesVersion")
+tasks.withType<KotlinCompile> {
+    kotlinOptions.jvmTarget = "13"
 }
