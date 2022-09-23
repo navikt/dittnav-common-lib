@@ -43,7 +43,7 @@ object Kotlinx {
 }
 
 object Logback {
-    private const val version = "1.2.3"
+    private const val version = "1.4.1"
     const val classic = "ch.qos.logback:logback-classic:$version"
 }
 
