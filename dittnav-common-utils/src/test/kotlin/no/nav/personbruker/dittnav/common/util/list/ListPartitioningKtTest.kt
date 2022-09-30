@@ -1,6 +1,6 @@
 package no.nav.personbruker.dittnav.common.util.list
 
-import org.amshove.kluent.`should be equal to`
+import io.kotest.matchers.shouldBe
 import org.junit.jupiter.api.Test
 
 internal class ListPartitioningKtTest {
@@ -13,7 +13,7 @@ internal class ListPartitioningKtTest {
 
         val expected = listOf(1, 2, 3)
 
-        partition `should be equal to` expected
+        partition shouldBe expected
     }
 
     @Test
@@ -24,11 +24,11 @@ internal class ListPartitioningKtTest {
 
         val expected = listOf(1, 2, 3)
 
-        partition `should be equal to` expected
+        partition shouldBe expected
 
         partition.add(4)
 
-        partition `should be equal to` expected + 4
+        partition shouldBe expected + 4
     }
 
     @Test
@@ -39,7 +39,7 @@ internal class ListPartitioningKtTest {
 
         val expected = listOf(4, 5)
 
-        partition `should be equal to` expected
+        partition shouldBe expected
     }
 
     @Test
@@ -50,11 +50,11 @@ internal class ListPartitioningKtTest {
 
         val expected = listOf(4, 5)
 
-        partition `should be equal to` expected
+        partition shouldBe expected
 
         partition.add(6)
 
-        partition `should be equal to` expected + 6
+        partition shouldBe expected + 6
     }
 
     @Test
@@ -65,13 +65,13 @@ internal class ListPartitioningKtTest {
         val partitionTo = numbers.mutablePartitionToIndex(2)
         partitionTo[0] = 10
 
-        partitionTo `should be equal to` listOf(10, 2)
-        numbers `should be equal to` original
+        partitionTo shouldBe listOf(10, 2)
+        numbers shouldBe original
 
         val partitionFrom = numbers.mutablePartitionFromIndex(2)
         partitionFrom[0] = 10
 
-        partitionFrom `should be equal to` listOf(10, 4, 5)
-        numbers `should be equal to` original
+        partitionFrom shouldBe listOf(10, 4, 5)
+        numbers shouldBe original
     }
 }
