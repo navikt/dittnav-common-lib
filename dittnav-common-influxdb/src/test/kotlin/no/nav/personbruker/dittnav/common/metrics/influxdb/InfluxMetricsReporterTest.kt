@@ -1,10 +1,13 @@
 package no.nav.personbruker.dittnav.common.metrics.influxdb
 
+import io.kotest.matchers.collections.shouldContainAll
+import io.kotest.matchers.longs.shouldBeGreaterThanOrEqual
+import io.kotest.matchers.longs.shouldBeLessThanOrEqual
+import io.kotest.matchers.shouldBe
 import io.mockk.coEvery
 import io.mockk.mockk
 import io.mockk.slot
 import kotlinx.coroutines.runBlocking
-import org.amshove.kluent.*
 import org.influxdb.dto.Point
 import org.junit.jupiter.api.Test
 import java.util.concurrent.TimeUnit
@@ -67,12 +70,12 @@ internal class InfluxMetricsReporterTest {
         val end = System.currentTimeMillis()
 
 
-        resultMeasurement `should be equal to` measurementName
-        resultFields `should be equal to` fields
-        resultTags.values `should contain same` listOf(application, cluster, namespace, tagVal)
-        resultTime `should be greater or equal to` start
-        resultTime `should be less or equal to` end
-        resultPrecision `should be equal to` TimeUnit.MILLISECONDS
+        resultMeasurement shouldBe measurementName
+        resultFields shouldBe fields
+        resultTags.values shouldContainAll listOf(application, cluster, namespace, tagVal)
+        resultTime shouldBeGreaterThanOrEqual start
+        resultTime shouldBeLessThanOrEqual end
+        resultPrecision shouldBe TimeUnit.MILLISECONDS
     }
 
     private inline fun <reified T: Any> Point.getPrivateField(fieldName: String): T {

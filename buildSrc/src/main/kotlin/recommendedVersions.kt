@@ -19,15 +19,12 @@ object Jjwt {
     const val jackson = "$groupId:jjwt-jackson:$version"
 }
 
-object Kluent {
-    private const val version = "1.68"
-    const val kluent = "org.amshove.kluent:kluent:$version"
-}
-
 object Kotest {
-    const val version = "4.3.1"
+    private const val version = "4.3.1"
     private const val groupId = "io.kotest"
 
+    const val runnerJunit5 = "$groupId:kotest-runner-junit5:$version"
+    const val assertionsCore = "$groupId:kotest-assertions-core:$version"
     const val extensions = "$groupId:kotest-extensions:$version"
 }
 
