@@ -1,11 +1,10 @@
 package no.nav.personbruker.dittnav.common.util.config
 
+import io.kotest.assertions.throwables.shouldThrowAny
+import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockkObject
 import io.mockk.unmockkObject
-import org.amshove.kluent.`should be equal to`
-import org.amshove.kluent.`should throw`
-import org.amshove.kluent.invoking
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -32,7 +31,7 @@ internal class UrlEnvVarTest {
 
         val url = UrlEnvVar.getEnvVarAsURL(envVarName)
 
-        url.toString() `should be equal to` urlString
+        url.toString() shouldBe urlString
     }
 
     @Test
@@ -47,9 +46,9 @@ internal class UrlEnvVarTest {
         val urlUntrimmed = UrlEnvVar.getEnvVarAsURL(envVarName, trimTrailingSlash = false)
         val urlTrimmed = UrlEnvVar.getEnvVarAsURL(envVarName, trimTrailingSlash = true)
 
-        urlDefault.toString() `should be equal to` urlString
-        urlUntrimmed.toString() `should be equal to` urlString
-        urlTrimmed.toString() `should be equal to` urlStringTrimmed
+        urlDefault.toString() shouldBe urlString
+        urlUntrimmed.toString() shouldBe urlString
+        urlTrimmed.toString() shouldBe urlStringTrimmed
     }
 
     @Test
@@ -58,7 +57,9 @@ internal class UrlEnvVarTest {
 
         every { SystemWrapper.getEnvVar(envVarName) } returns urlString
 
-        invoking { UrlEnvVar.getEnvVarAsURL(envVarName) } `should throw` Exception::class
+        shouldThrowAny {
+            UrlEnvVar.getEnvVarAsURL(envVarName)
+        }
     }
 
     @Test
@@ -69,7 +70,7 @@ internal class UrlEnvVarTest {
 
         val url = UrlEnvVar.getOptionalEnvVarAsURL(envVarName)
 
-        url.toString() `should be equal to` urlString
+        url.toString() shouldBe urlString
     }
 
     @Test
@@ -84,9 +85,9 @@ internal class UrlEnvVarTest {
         val urlUntrimmed = UrlEnvVar.getOptionalEnvVarAsURL(envVarName, trimTrailingSlash = false)
         val urlTrimmed = UrlEnvVar.getOptionalEnvVarAsURL(envVarName, trimTrailingSlash = true)
 
-        urlDefault.toString() `should be equal to` urlString
-        urlUntrimmed.toString() `should be equal to` urlString
-        urlTrimmed.toString() `should be equal to` urlStringTrimmed
+        urlDefault.toString() shouldBe urlString
+        urlUntrimmed.toString() shouldBe urlString
+        urlTrimmed.toString() shouldBe urlStringTrimmed
     }
 
     @Test
@@ -95,6 +96,8 @@ internal class UrlEnvVarTest {
 
         every { SystemWrapper.getEnvVar(envVarName) } returns urlString
 
-        invoking { UrlEnvVar.getOptionalEnvVarAsURL(envVarName) } `should throw` Exception::class
+        shouldThrowAny {
+            UrlEnvVar.getOptionalEnvVarAsURL(envVarName)
+        }
     }
 }

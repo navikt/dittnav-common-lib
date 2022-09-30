@@ -36,8 +36,8 @@ dependencies {
     testImplementation(kotlin("test-junit5"))
     testImplementation(Junit.api)
     testImplementation(Junit.engine)
-    testImplementation(Kluent.kluent)
     testImplementation(Mockk.mockk)
+    testImplementation(Kotest.assertionsCore)
 }
 
 tasks {

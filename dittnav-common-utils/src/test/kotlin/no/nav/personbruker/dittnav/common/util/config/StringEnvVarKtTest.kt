@@ -1,5 +1,7 @@
 package no.nav.personbruker.dittnav.common.util.config
 
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.matchers.shouldBe
 import io.mockk.every
 import io.mockk.mockkObject
 import io.mockk.unmockkObject
@@ -7,13 +9,10 @@ import no.nav.personbruker.dittnav.common.util.config.StringEnvVar.getEnvVar
 import no.nav.personbruker.dittnav.common.util.config.StringEnvVar.getEnvVarAsList
 import no.nav.personbruker.dittnav.common.util.config.StringEnvVar.getOptionalEnvVar
 import no.nav.personbruker.dittnav.common.util.config.StringEnvVar.getOptionalEnvVarAsList
-import org.amshove.kluent.`should be equal to`
-import org.amshove.kluent.`should throw`
-import org.amshove.kluent.invoking
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
-import java.lang.IllegalStateException
+import kotlin.IllegalStateException
 
 internal class StringEnvVarKtTest {
 
@@ -40,7 +39,7 @@ internal class StringEnvVarKtTest {
 
         val result = getEnvVar(envName, default)
 
-        result `should be equal to` envVal
+        result shouldBe envVal
     }
 
     @Test
@@ -51,14 +50,16 @@ internal class StringEnvVarKtTest {
 
         val result = getEnvVar(envName, default)
 
-        result `should be equal to` default
+        result shouldBe default
     }
 
     @Test
     fun `Function getEnvVar should throw exception if variable was not found and no default was specified`() {
         every { SystemWrapper.getEnvVar(envName) } returns null
 
-        invoking { getEnvVar(envName) } `should throw` IllegalStateException::class
+        shouldThrow<IllegalStateException> {
+            getEnvVar(envName)
+        }
     }
 
     @Test
@@ -69,7 +70,7 @@ internal class StringEnvVarKtTest {
 
         val result = getOptionalEnvVar(envName, default)
 
-        result `should be equal to` envVal
+        result shouldBe envVal
     }
 
     @Test
@@ -80,7 +81,7 @@ internal class StringEnvVarKtTest {
 
         val result = getOptionalEnvVar(envName, default)
 
-        result `should be equal to` default
+        result shouldBe default
     }
 
     @Test
@@ -89,7 +90,7 @@ internal class StringEnvVarKtTest {
 
         val result = getOptionalEnvVar(envName)
 
-        result `should be equal to` null
+        result shouldBe null
     }
 
     @Test
@@ -102,7 +103,7 @@ internal class StringEnvVarKtTest {
 
         val result = getEnvVarAsList(envName, default)
 
-        result `should be equal to` expected
+        result shouldBe expected
     }
 
     @Test
@@ -113,14 +114,16 @@ internal class StringEnvVarKtTest {
 
         val result = getEnvVarAsList(envName, default)
 
-        result `should be equal to` default
+        result shouldBe default
     }
 
     @Test
     fun `Function getEnvVarAsList should throw exception if variable was not found and no default was specified`() {
         every { SystemWrapper.getEnvVar(envName) } returns null
 
-        invoking { getEnvVarAsList(envName) } `should throw` IllegalStateException::class
+        shouldThrow<IllegalStateException> {
+            getEnvVarAsList(envName)
+        }
     }
 
     @Test
@@ -133,9 +136,9 @@ internal class StringEnvVarKtTest {
         val expectedPipe = listOf("one", "two.three", "four")
         val expectedDot = listOf("one|two", "three|four")
 
-        getEnvVarAsList(envName) `should be equal to` expectedDefault
-        getEnvVarAsList(envName, separator = "|") `should be equal to` expectedPipe
-        getEnvVarAsList(envName, separator = ".") `should be equal to` expectedDot
+        getEnvVarAsList(envName) shouldBe expectedDefault
+        getEnvVarAsList(envName, separator = "|") shouldBe expectedPipe
+        getEnvVarAsList(envName, separator = ".") shouldBe expectedDot
     }
 
     @Test
@@ -148,7 +151,7 @@ internal class StringEnvVarKtTest {
 
         val result = getOptionalEnvVarAsList(envName, default)
 
-        result `should be equal to` expected
+        result shouldBe expected
     }
 
     @Test
@@ -159,7 +162,7 @@ internal class StringEnvVarKtTest {
 
         val result = getOptionalEnvVarAsList(envName, default)
 
-        result `should be equal to` default
+        result shouldBe default
     }
 
     @Test
@@ -168,7 +171,7 @@ internal class StringEnvVarKtTest {
 
         val result = getOptionalEnvVarAsList(envName)
 
-        result `should be equal to` emptyList()
+        result shouldBe emptyList()
     }
 
     @Test
@@ -181,8 +184,8 @@ internal class StringEnvVarKtTest {
         val expectedPipe = listOf("one", "two.three", "four")
         val expectedDot = listOf("one|two", "three|four")
 
-        getOptionalEnvVarAsList(envName) `should be equal to` expectedDefault
-        getOptionalEnvVarAsList(envName, separator = "|") `should be equal to` expectedPipe
-        getOptionalEnvVarAsList(envName, separator = ".") `should be equal to` expectedDot
+        getOptionalEnvVarAsList(envName) shouldBe expectedDefault
+        getOptionalEnvVarAsList(envName, separator = "|") shouldBe expectedPipe
+        getOptionalEnvVarAsList(envName, separator = ".") shouldBe expectedDot
     }
 }

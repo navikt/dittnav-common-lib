@@ -14,7 +14,7 @@ dependencies {
     testImplementation(Jjwt.impl)
     testImplementation(Jjwt.jackson)
     testImplementation(Junit.engine)
-    testImplementation(Kluent.kluent)
+    testImplementation(Kotest.assertionsCore)
     testImplementation(Mockk.mockk)
 }
 
